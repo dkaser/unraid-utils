@@ -1,9 +1,9 @@
-                      |-----handy-ruler------------------------------------------------------|
-unraid-plugin-template: unraid-plugin-template
-unraid-plugin-template:
-unraid-plugin-template: Sample slack-desc file
-unraid-plugin-template: 
-unraid-plugin-template: 
-unraid-plugin-template:
-unraid-plugin-template: https://github.com/dkaser/unraid-plugin-template
-unraid-plugin-template:
+          |-----handy-ruler------------------------------------------------------|
+edac-utils: edacerton-utils
+edac-utils:
+edac-utils: Common classes for plugins maintained by EDACerton.
+edac-utils: 
+edac-utils: 
+edac-utils:
+edac-utils: https://github.com/dkaser/unraid-utils
+edac-utils:

@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginName;
+namespace EDAC;
 
 /*
     Copyright (C) 2025  Derek Kaser
