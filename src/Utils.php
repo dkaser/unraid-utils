@@ -1,6 +1,6 @@
 <?php
 
-namespace EDACerton;
+namespace dkaser\PluginUtils;
 
 /*
     Copyright (C) 2025  Derek Kaser
