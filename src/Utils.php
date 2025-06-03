@@ -70,4 +70,17 @@ class Utils
             $this->logmsg("Caught exception in {$functionName} : " . $e->getMessage());
         }
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function parse_plugin_cfg(string $plugin): array
+    {
+        $default = "/usr/local/emhttp/plugins/{$plugin}/default.cfg";
+        $user    = "/boot/config/plugins/{$plugin}/{$plugin}.cfg";
+
+        $cfg_default = parse_ini_file($default, false, INI_SCANNER_RAW) ?: array();
+        $cfg_user    = parse_ini_file($user, false, INI_SCANNER_RAW) ?: array();
+        return array_replace_recursive($cfg_default, $cfg_user);
+    }
 }
