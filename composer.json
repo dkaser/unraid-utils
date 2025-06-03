@@ -1,11 +1,11 @@
 {
-    "name": "dkaser/unraid-utils",
+    "name": "dkaser/plugin-utils",
     "description": "Utility classes",
     "type": "library",
     "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
-            "dkaser\\unraid-utils\\": "src/"
+            "dkaser\\PluginUtils\\": "src/"
         }
     },
     "authors": [
