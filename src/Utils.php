@@ -1,6 +1,6 @@
 <?php
 
-namespace dkaser\PluginUtils;
+namespace EDACerton\PluginUtils;
 
 /*
     Copyright (C) 2025  Derek Kaser
@@ -21,15 +21,21 @@ namespace dkaser\PluginUtils;
 
 class Utils
 {
-    public static function logmsg(string $message): void
-    {
-        if ( ! defined(__NAMESPACE__ . "\PLUGIN_NAME")) {
-            throw new \RuntimeException("PLUGIN_NAME not defined");
-        }
+    private string $pluginName;
 
+    public function __construct(string $pluginName)
+    {
+        $this->pluginName = $pluginName;
+        if ( ! defined(__NAMESPACE__ . "\PLUGIN_NAME")) {
+            define(__NAMESPACE__ . "\PLUGIN_NAME", $pluginName);
+        }
+    }
+
+    public function logmsg(string $message): void
+    {
         $timestamp = date('Y/m/d H:i:s');
         $filename  = basename(is_string($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : "");
-        file_put_contents("/var/log/" . PLUGIN_NAME . ".log", "{$timestamp} {$filename}: {$message}" . PHP_EOL, FILE_APPEND);
+        file_put_contents("/var/log/" . $this->pluginName . ".log", "{$timestamp} {$filename}: {$message}" . PHP_EOL, FILE_APPEND);
     }
 
     public static function auto_v(string $file): string
@@ -55,13 +61,13 @@ class Utils
     /**
     * @param array<mixed> $args
     */
-    public static function run_task(string $functionName, array $args = array()): void
+    public function run_task(string $functionName, array $args = array()): void
     {
         try {
             $reflectionMethod = new \ReflectionMethod($functionName);
             $reflectionMethod->invokeArgs(null, $args);
         } catch (\Throwable $e) {
-            Utils::logmsg("Caught exception in {$functionName} : " . $e->getMessage());
+            $this->logmsg("Caught exception in {$functionName} : " . $e->getMessage());
         }
     }
 }

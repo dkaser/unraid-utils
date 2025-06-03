@@ -1,6 +1,6 @@
 <?php
 
-namespace dkaser\PluginUtils;
+namespace EDACerton\PluginUtils;
 
 /*
     Copyright (C) 2025  Derek Kaser
@@ -43,22 +43,18 @@ class Translator
         return $result;
     }
 
-    public function __construct()
+    public function __construct(string $basePath)
     {
         global $login_locale;
-
-        if ( ! defined(__NAMESPACE__ . "\PLUGIN_ROOT")) {
-            throw new \RuntimeException("PLUGIN_ROOT not defined");
-        }
 
         $dynamix = parse_ini_file('/boot/config/plugins/dynamix/dynamix.cfg', true) ?: array();
 
         $locale        = $_SESSION['locale'] ?? ($login_locale ?? ($dynamix['display']['locale'] ?? "none"));
-        $plugin_locale = (array) json_decode(file_get_contents(PLUGIN_ROOT . "/locales/en_US.json") ?: "{}", true);
+        $plugin_locale = (array) json_decode(file_get_contents($basePath . "/locales/en_US.json") ?: "{}", true);
         $plugin_lang   = self::flattenArray($plugin_locale);
 
-        if (file_exists(PLUGIN_ROOT . "/locales/{$locale}.json")) {
-            $current_locale = (array) json_decode(file_get_contents(PLUGIN_ROOT . "/locales/{$locale}.json") ?: "{}", true);
+        if (file_exists($basePath . "/locales/{$locale}.json")) {
+            $current_locale = (array) json_decode(file_get_contents($basePath . "/locales/{$locale}.json") ?: "{}", true);
             $current_lang   = self::flattenArray($current_locale);
             $plugin_lang    = array_replace($plugin_lang, $current_lang);
         }
