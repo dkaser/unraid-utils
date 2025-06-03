@@ -1,6 +1,6 @@
 <?php
 
-namespace EDAC;
+namespace EDACerton;
 
 /*
     Copyright (C) 2025  Derek Kaser
