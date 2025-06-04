@@ -31,8 +31,40 @@ class Utils
         }
     }
 
-    public function logmsg(string $message): void
+    /**
+     * @return array<string>
+     */
+    public function run_command(string $command, bool $alwaysShow = false, bool $show = true): array
     {
+        $output = array();
+        $retval = null;
+        if ($show) {
+            $this->logmsg("exec: {$command}");
+        }
+        exec("{$command} 2>&1", $output, $retval);
+
+        if (($retval != 0) || $alwaysShow) {
+            $this->logmsg("Command returned {$retval}" . PHP_EOL . implode(PHP_EOL, $output));
+        }
+
+        return $output;
+    }
+
+    public function logmsg(string $message, bool $debug = false, bool $rateLimit = false): void
+    {
+        if ($rateLimit && (intval(date("i")) % 10 != 0)) {
+            // Only log rate limited messages every 10 minutes
+            return;
+        }
+
+        if ($debug) {
+            if (defined("PLUGIN_DEBUG")) {
+                $message = "DEBUG: " . $message;
+            } else {
+                return;
+            }
+        }
+
         $timestamp = date('Y/m/d H:i:s');
         $filename  = basename(is_string($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : "");
         file_put_contents("/var/log/" . $this->pluginName . ".log", "{$timestamp} {$filename}: {$message}" . PHP_EOL, FILE_APPEND);
