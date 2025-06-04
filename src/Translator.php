@@ -62,8 +62,8 @@ class Translator
         $this->lang = $plugin_lang;
     }
 
-    public function tr(string $message): string
+    public function tr(string $message, bool $htmlencode = true): string
     {
-        return $this->lang[strtolower($message)];
+        return $htmlencode ? htmlspecialchars($this->lang[strtolower($message)]) : $this->lang[strtolower($message)];
     }
 }
