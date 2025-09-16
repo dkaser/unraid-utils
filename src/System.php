@@ -21,7 +21,7 @@ namespace EDACerton\PluginUtils;
 
 class System
 {
-    public function updateHostsFile(string $fqdn, string $ip): void
+    public static function updateHostsFile(string $fqdn, string $ip): void
     {
         $hostsFile = '/etc/hosts';
         $hosts     = file($hostsFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
