@@ -47,7 +47,13 @@ class Translator
     {
         global $login_locale;
 
-        $dynamix = parse_ini_file('/boot/config/plugins/dynamix/dynamix.cfg', true) ?: array();
+        $dynamixConfig = '/boot/config/plugins/dynamix/dynamix.cfg';
+
+        if (file_exists($dynamixConfig)) {
+            $dynamix = parse_ini_file($dynamixConfig, true) ?: array();
+        } else {
+            $dynamix = array();
+        }
 
         $locale        = $_SESSION['locale'] ?? ($login_locale ?? ($dynamix['display']['locale'] ?? "none"));
         $plugin_locale = (array) json_decode(file_get_contents($basePath . "/locales/en_US.json") ?: "{}", true);
