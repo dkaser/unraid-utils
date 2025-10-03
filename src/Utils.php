@@ -93,13 +93,14 @@ class Utils
     /**
     * @param array<mixed> $args
     */
-    public function run_task(string $functionName, array $args = array()): void
+    public function run_task(string $functionName, array $args = array()): mixed
     {
         try {
             $reflectionMethod = new \ReflectionMethod($functionName);
-            $reflectionMethod->invokeArgs(null, $args);
+            return $reflectionMethod->invokeArgs(null, $args);
         } catch (\Throwable $e) {
             $this->logmsg("Caught exception in {$functionName} : " . $e->getMessage());
+            return null;
         }
     }
 
