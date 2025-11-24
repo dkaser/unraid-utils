@@ -13,7 +13,9 @@
             "name": "Derek Kaser"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=8.3"
+    },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",
         "phpstan/phpstan": "^2.1"
