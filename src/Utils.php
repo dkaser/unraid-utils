@@ -96,7 +96,7 @@ class Utils
     public function run_task(string $functionName, array $args = array()): mixed
     {
         try {
-            $reflectionMethod = new \ReflectionMethod($functionName);
+            $reflectionMethod = \ReflectionMethod::createFromMethodName($functionName);
             return $reflectionMethod->invokeArgs(null, $args);
         } catch (\Throwable $e) {
             $this->logmsg("Caught exception in {$functionName} : " . $e->getMessage());
