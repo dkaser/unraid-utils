@@ -123,7 +123,7 @@ class Utils
     public function getLicenseBlock(): string
     {
         return <<<EOD
-            <table class="unraid tablesorter"><thead><tr><td>License</td></tr></thead></table>
+            <table class="unraid tablesorter"><thead><tr><td>Plugin License</td></tr></thead></table>
             <p>
                 This program is free software: you can redistribute it and/or modify
                 it under the terms of the GNU General Public License as published by
